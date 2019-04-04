@@ -1,25 +1,29 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Cd {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "Title")
     private String title;
-
+    @Column(name = "Description")
     private String description;
-
+    @Column(name = "Year")
     private int year;
-
+    @Column(name = "Artist")
     private String artist;
-
+    @Column(name = "Price")
     private Double price;
+
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<Artist> artistList  = new HashSet<>();
 
 
 
@@ -33,7 +37,14 @@ public class Cd {
         this.price = price;
     }
 
-
+    public Cd(String title, String description, int year, String artist, Double price, Set<Artist> artistList) {
+        this.title = title;
+        this.description = description;
+        this.year = year;
+        this.artist = artist;
+        this.price = price;
+        this.artistList = artistList;
+    }
 
     public Long getId() {
         return id;
@@ -81,6 +92,14 @@ public class Cd {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Set<Artist> getArtistList() {
+        return artistList;
+    }
+
+    public void setArtistList(Set<Artist> artistList) {
+        this.artistList = artistList;
     }
 
     @Override

@@ -7,6 +7,8 @@
 
     <persistence-unit name="CD_ArtistJPA" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>entities.Cd</class>
+        <class>entities.Artist</class>
         <properties>
             <!---->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/RecordLabel" />
